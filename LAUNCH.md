@@ -2,53 +2,55 @@
 
 ## Positioning
 
-SignalMD is a research radar for clinicians. It watches the literature doctors care about and delivers source-linked evidence signals before the research gets lost in inboxes, conferences, or outdated guidelines.
+SignalMD helps patients bring better questions to their doctor. It turns a health question into a short appointment card with PubMed-linked sources, uncertainty language, and respectful doctor-facing questions.
 
 ## One-liner
 
-Never miss the medical research that matters to your specialty.
+Bring better questions to your doctor, backed by real sources.
 
-## Longer pitch
+## Public promise
 
-Practicing clinicians are overwhelmed by the speed of research. SignalMD gives doctors a personalized, source-first literature radar: watched topics, transparent evidence tags, PubMed source links, and weekly research signals without chatbot medical advice.
+SignalMD does not diagnose you or tell you what treatment to choose. It helps you find sources, understand what those sources do not prove, and ask a doctor whether the evidence applies to your situation.
 
 ## Website headline
 
-Track what changed before it reaches the hallway.
+Bring better questions to your doctor.
 
 ## Website subheadline
 
-Source-first literature surveillance for physicians who want current evidence without a chatbot inventing conclusions.
+Source-backed appointment prep for patients who want to be informed without walking in with an AI-written paper.
 
 ## First X posts
 
-1. Doctors are not behind because they are careless. They are overloaded. SignalMD is a source-first research radar for clinicians who want to know what changed before it becomes guideline folklore.
+1. Patients are reading medical research whether the system likes it or not. SignalMD is for turning that curiosity into better doctor questions, with sources and humility built in.
 
-2. Most AI medical tools try to answer clinical questions. SignalMD starts somewhere safer: retrieve the newest legitimate research, show the source, label the evidence type, and let clinicians judge.
+2. Rule one for SignalMD: no source, no claim. The app should never make a patient look careless in front of a doctor.
 
-3. Building SignalMD in public: specialty watchlists, PubMed-linked evidence feeds, transparent ranking, no generated medical advice. Starting with lipidology, cardiometabolic medicine, oncology, psychiatry, and high-end primary care.
+3. The output is not "doctor, I know better." The output is "I may be misunderstanding this. Is this evidence relevant to me?"
 
-4. The first question SignalMD asks is not "what should this doctor do?" It is "what new evidence should this doctor not miss?"
+4. Starting with health optimizers and lab-marker people, but the workflow is for any patient: ask a real question, find credible sources, bring a short appointment card.
+
+5. SignalMD does not diagnose, prescribe, or tell you to change treatment. It helps you ask a medical professional better questions.
 
 ## X bio
 
-Source-first research radar for clinicians. PubMed-linked literature signals, specialty watchlists, transparent evidence tags. No generated medical advice.
+Source-backed appointment prep for patients. Better doctor questions, PubMed links, uncertainty built in. No diagnosis. No treatment advice.
 
 ## Founder DM
 
-I am building SignalMD, a source-first research radar for clinicians. It tracks watched topics, surfaces recent PubMed-linked evidence, and labels study types without generating medical advice. I am looking for founding doctors to pressure-test the workflow. What research area do you wish someone tracked for you every week?
+I am building SignalMD, a source-backed appointment prep tool for patients. It helps people turn health questions into short doctor conversation cards with PubMed links and "what this does not prove" guardrails. What is one topic you wish patients could ask about more clearly?
 
 ## Account checklist
 
-- X account handle: `SignalMD`, `SignalMDHQ`, or `GetSignalMD`
-- Domain candidates: `signalmd.ai`, `signalmd.com`, `getsignalmd.com`
+- X account handle: `SignalMD`, `SignalMDHQ`, `GetSignalMD`, or `AskSignalMD`
+- Domain candidates: `signalmd.ai`, `getsignalmd.com`, `asksignalmd.com`
 - GitHub repository: `signalmd`
-- Email: `founders@signalmd.ai` or `hello@getsignalmd.com`
+- Email: `hello@getsignalmd.com`, `founders@signalmd.ai`, or `ask@signalmd.ai`
 
-## Compliance notes before public paid launch
+## Public launch cautions
 
-- Add attorney-reviewed terms of use and privacy policy.
-- Avoid implying diagnosis, prescribing, or treatment recommendations.
-- Add clear clinician-only positioning if the first product is not patient-facing.
-- Review whether any feature crosses into regulated clinical decision support.
-- Add source provenance, retrieval logs, and versioned scoring rules.
+- Avoid "AI doctor" language.
+- Avoid implying that SignalMD can detect, diagnose, prevent, treat, or cure disease.
+- Avoid implying that patients should challenge doctors with conclusions.
+- Use "questions to ask your doctor" instead of "what you should do."
+- Add attorney-reviewed terms, privacy policy, and medical disclaimer before collecting accounts or sensitive health data.

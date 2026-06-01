@@ -1,61 +1,73 @@
 # SignalMD
 
-SignalMD is a source-first research radar for clinicians. The first version is a static web app that searches PubMed, displays retrieved source metadata, ranks records with transparent rules, and saves clinician watchlist topics in the browser.
+SignalMD is a patient-first evidence prep tool. It helps people bring calm, source-backed questions to a doctor visit without generating medical advice.
 
-## What it is
+## Product rule
 
-- A live PubMed search interface for followed clinical topics.
-- A saved watchlist for topics such as ApoB, Lp(a), GLP-1 outcomes, statin intolerance, and specialty-specific research areas.
-- A deterministic evidence signal layer based on publication type, recency, and title metadata.
-- A public website surface that explains the trust boundary and go-to-market promise.
+No source, no claim.
 
-## What it is not
+The MVP only displays retrieved PubMed metadata: title, journal, publication date, publication type tags, PMID, and source links. The appointment card is generated from templates and selected PubMed records. It does not summarize study findings, diagnose, prescribe, or tell a patient what to do.
 
-- It is not a diagnostic tool.
-- It is not a prescribing tool.
-- It does not generate clinical recommendations.
-- It does not summarize findings as fact unless a retrieved source supports the displayed metadata.
+## Who it is for
+
+The first wedge is the health optimizer: people who track labs, read about markers, and want to ask better questions without sounding like they outsourced their appointment to a chatbot.
+
+The product should still work for all patients because the core workflow is broad:
+
+1. Write the real question.
+2. Search for credible sources.
+3. Select one to three sources.
+4. Bring a short conversation card to the doctor.
+
+## What the app creates
+
+- A patient-sounding opener.
+- Doctor-facing questions.
+- A "what this does not prove" section.
+- Optional private notes stored only in the browser.
+- A source table with PMID and PubMed links.
+
+## Source integrity checks
+
+Every source card shows:
+
+- PubMed ID matched the search result.
+- Title returned by the PubMed summary endpoint.
+- Public PubMed source link exists.
+
+Records that fail source-lock checks are not used in the conversation card.
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder with any static file server:
-
 ```powershell
-npx serve .
+node server.mjs
 ```
 
-The app calls the public NCBI E-utilities endpoints from the browser:
+Then open:
 
-- `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi`
-- `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi`
+```text
+http://127.0.0.1:4177
+```
 
-## Evidence scoring
+You can auto-run a search:
 
-The first scoring layer is intentionally simple and inspectable:
+```text
+http://127.0.0.1:4177/?q=ApoB%20cardiovascular%20risk
+```
 
-- Guidelines, meta-analyses, systematic reviews, and randomized trials receive higher signal scores.
-- Cohort and observational signals are labeled separately.
-- Case reports are demoted.
-- Recent records receive an additional freshness boost.
+## Data handling
 
-This is not a final evidence-grading engine. Production versions should integrate guideline sources, retraction checks, trial registry matching, conflict-of-interest extraction, specialty ontologies, and human clinical review.
+The MVP has no account system and no database. Private notes are stored in `localStorage` in the user's browser. PubMed searches are sent to NCBI E-utilities.
 
-## Launch wedge
+## Production roadmap
 
-Start with clinicians who already care about staying current:
+1. Add plain-language source summaries only when every sentence is citation-bound.
+2. Add source redundancy: PubMed, guideline sources, ClinicalTrials.gov, FDA safety communications, and retraction checks.
+3. Add clinician review workflows for high-use topics.
+4. Add account login only after privacy, security, and legal review.
+5. Add export formats for patient portal messages and printable appointment prep.
+6. Add topic-specific guardrails for medications, pregnancy, cancer, mental health, emergencies, and pediatrics.
 
-- Lipidology and preventive cardiology
-- Cardiometabolic and endocrinology practices
-- Oncology specialists
-- Psychiatry practices tracking fast-moving evidence
-- Longevity and high-end primary care clinics
+## Safety boundary
 
-## Near-term roadmap
-
-1. Add email capture and founding clinician onboarding.
-2. Add topic folders by specialty.
-3. Add weekly digest generation from retrieved source records only.
-4. Add Cochrane, ClinicalTrials.gov, FDA safety communications, and society guideline feeds.
-5. Add retraction and correction checks.
-6. Add clinician-reviewed evidence profiles.
-7. Add paid seats for private practice groups.
+SignalMD is educational appointment-prep software. It should always refer users to a medical professional for diagnosis, treatment decisions, medication changes, and interpretation of personal health information.

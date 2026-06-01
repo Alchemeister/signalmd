@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SignalMD - Source-first research radar for clinicians</title>
+    <title>SignalMD - Source-backed questions for doctor visits</title>
     <meta
       name="description"
-      content="SignalMD helps clinicians track current medical literature with source-first PubMed search, transparent evidence filters, and saved specialty watchlists."
+      content="SignalMD helps patients prepare source-backed questions for doctor visits without generating medical advice."
     >
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -17,151 +17,170 @@
         <span>SignalMD</span>
       </a>
       <nav aria-label="Primary">
-        <a href="#app">Radar</a>
+        <a href="#app">Ask</a>
+        <a href="#sources">Sources</a>
+        <a href="#brief">Brief</a>
         <a href="#trust">Trust</a>
-        <a href="#launch">Launch</a>
       </nav>
     </header>
 
     <main>
-      <section id="app" class="workspace" aria-labelledby="workspace-title">
-        <aside class="control-panel" aria-label="Research controls">
-          <div>
-            <p class="eyebrow">Clinician research radar</p>
-            <h1 id="workspace-title">Track what changed before it reaches the hallway.</h1>
-            <p class="lede">
-              Source-first literature surveillance for physicians who want current evidence without a chatbot inventing conclusions.
-            </p>
-          </div>
+      <section id="app" class="hero-app" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Patient evidence prep</p>
+          <h1 id="hero-title">Bring better questions to your doctor.</h1>
+          <p class="lede">
+            SignalMD helps patients turn curiosity, labs, symptoms, or health optimization questions into calm, source-backed
+            conversation cards. No diagnosis. No treatment advice. No claim without a source.
+          </p>
+        </div>
 
-          <form id="search-form" class="search-form">
-            <label for="topic">Topic or clinical question</label>
-            <div class="input-row">
-              <input id="topic" name="topic" type="search" value="ApoB cardiovascular risk" autocomplete="off">
-              <button type="submit">Search</button>
-            </div>
-
-            <div class="field-grid">
-              <label>
-                Specialty
-                <select id="specialty">
-                  <option value="">Any specialty</option>
-                  <option>Lipidology</option>
-                  <option>Cardiology</option>
-                  <option>Endocrinology</option>
-                  <option>Oncology</option>
-                  <option>Psychiatry</option>
-                  <option>Primary care</option>
-                  <option>Longevity medicine</option>
-                </select>
+        <section class="builder-shell" aria-label="Question builder">
+          <aside class="builder-panel">
+            <form id="search-form" class="builder-form">
+              <label for="patient-question">
+                Your real question
+                <textarea id="patient-question" rows="5">My LDL-C is not extremely high, but I keep reading that ApoB may show cardiovascular risk better. Is ApoB worth discussing with my doctor?</textarea>
               </label>
 
-              <label>
-                Evidence lens
-                <select id="evidence">
-                  <option value="high">High signal</option>
-                  <option value="reviews">Reviews</option>
-                  <option value="trials">Clinical trials</option>
-                  <option value="guidelines">Guidelines</option>
-                  <option value="broad">Broad scan</option>
-                </select>
+              <label for="topic">
+                Research topic to search
+                <div class="input-row">
+                  <input id="topic" name="topic" type="search" value="ApoB cardiovascular risk" autocomplete="off">
+                  <button type="submit">Find sources</button>
+                </div>
               </label>
 
-              <label>
-                Time window
-                <select id="date-window">
-                  <option value="365">Last 12 months</option>
-                  <option value="1095">Last 3 years</option>
-                  <option value="1825">Last 5 years</option>
-                  <option value="3650">Last 10 years</option>
-                </select>
+              <label for="notes">
+                Private notes for your appointment
+                <textarea id="notes" rows="5" placeholder="Optional: labs, family history, medication questions, symptoms, or what you want to remember. Notes stay in this browser."></textarea>
               </label>
 
-              <label>
-                Result count
-                <select id="limit">
-                  <option value="12">12</option>
-                  <option value="24">24</option>
-                  <option value="48">48</option>
-                </select>
-              </label>
+              <div class="field-grid">
+                <label>
+                  Source strictness
+                  <select id="evidence">
+                    <option value="strict">Guidelines, reviews, trials</option>
+                    <option value="guidelines">Guidelines only</option>
+                    <option value="reviews">Reviews and meta-analyses</option>
+                    <option value="trials">Clinical trials</option>
+                    <option value="observational">Include observational</option>
+                    <option value="broad">Broad scan</option>
+                  </select>
+                </label>
+
+                <label>
+                  Time window
+                  <select id="date-window">
+                    <option value="1095">Last 3 years</option>
+                    <option value="365">Last 12 months</option>
+                    <option value="1825">Last 5 years</option>
+                    <option value="3650">Last 10 years</option>
+                  </select>
+                </label>
+
+                <label>
+                  Result count
+                  <select id="limit">
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                    <option value="48">48</option>
+                  </select>
+                </label>
+
+                <label>
+                  Visit tone
+                  <select id="tone">
+                    <option value="calm">Calm and respectful</option>
+                    <option value="concise">Short patient portal note</option>
+                    <option value="curious">Curious optimizer</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="button-row">
+                <button type="button" id="save-note" class="secondary">Save local note</button>
+                <button type="button" id="clear-note" class="secondary">Clear note</button>
+              </div>
+            </form>
+
+            <section class="starter-section" aria-labelledby="starter-title">
+              <div class="section-heading">
+                <h2 id="starter-title">Starter searches</h2>
+                <button id="clear-watchlist" type="button" class="text-button">Reset</button>
+              </div>
+              <div id="watchlist-items" class="chip-list"></div>
+            </section>
+          </aside>
+
+          <section id="sources" class="sources-panel" aria-live="polite" aria-busy="false">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Source lock</p>
+                <h2 id="results-title">No source selected yet</h2>
+              </div>
+              <div id="status" class="status">Ready</div>
             </div>
 
-            <div class="button-row">
-              <button type="button" id="save-topic" class="secondary">Save topic</button>
-              <button type="button" id="export-csv" class="secondary">Export CSV</button>
+            <div class="guardrail">
+              <strong>No source, no claim.</strong>
+              SignalMD can show titles, journal metadata, publication types, dates, and PubMed links retrieved from source APIs.
+              It does not tell you what to do medically.
             </div>
-          </form>
 
-          <section class="watchlist" aria-labelledby="watchlist-title">
-            <div class="section-heading">
-              <h2 id="watchlist-title">Watchlist</h2>
-              <button id="clear-watchlist" type="button" class="text-button">Clear</button>
-            </div>
-            <div id="watchlist-items" class="watchlist-items"></div>
+            <div id="summary-strip" class="summary-strip" hidden></div>
+            <div id="results" class="results-list"></div>
           </section>
-        </aside>
-
-        <section class="results-panel" aria-live="polite" aria-busy="false">
-          <div class="results-header">
-            <div>
-              <p class="eyebrow">Live source feed</p>
-              <h2 id="results-title">PubMed evidence scan</h2>
-            </div>
-            <div id="status" class="status">Ready</div>
-          </div>
-
-          <div class="guardrail">
-            <strong>No generated medical advice.</strong>
-            Results show retrieved metadata, source links, and transparent ranking tags. Clinical conclusions stay with the clinician.
-          </div>
-
-          <div id="summary-strip" class="summary-strip" hidden></div>
-          <div id="results" class="results-list"></div>
         </section>
       </section>
 
-      <section id="trust" class="band trust-band">
-        <div class="band-inner">
-          <div>
-            <p class="eyebrow">Why hallucination risk still exists</p>
-            <h2>Search tools drift when they start pretending to reason from papers they did not verify.</h2>
+      <section id="brief" class="brief-band" aria-labelledby="brief-title">
+        <div class="brief-grid">
+          <div class="brief-copy">
+            <p class="eyebrow">Doctor conversation card</p>
+            <h2 id="brief-title">Sound like yourself, with sources behind you.</h2>
+            <p>
+              This card is intentionally short. It gives you a natural way to ask the question, a few doctor-facing questions,
+              what the evidence does not prove, and a source table.
+            </p>
+            <div class="brief-actions">
+              <button type="button" id="copy-brief">Copy card</button>
+              <button type="button" id="print-brief" class="secondary">Print</button>
+              <button type="button" id="download-brief" class="secondary">Download</button>
+            </div>
           </div>
-          <div class="trust-grid">
-            <article>
-              <h3>Source-first retrieval</h3>
-              <p>Every result links to PubMed. The app does not cite papers it did not retrieve.</p>
-            </article>
-            <article>
-              <h3>Transparent scoring</h3>
-              <p>Signal labels come from publication type, recency, and title metadata. The rules are visible in code.</p>
-            </article>
-            <article>
-              <h3>Clinician boundary</h3>
-              <p>SignalMD surfaces research. It does not diagnose, prescribe, or replace professional judgment.</p>
-            </article>
-          </div>
+
+          <article id="conversation-card" class="conversation-card">
+            <div class="card-empty">
+              Find sources, select the ones you want to bring, and SignalMD will build a short doctor conversation card here.
+            </div>
+          </article>
         </div>
       </section>
 
-      <section id="launch" class="band launch-band">
-        <div class="band-inner launch-layout">
+      <section id="trust" class="trust-band">
+        <div class="trust-inner">
           <div>
-            <p class="eyebrow">Go-to-market wedge</p>
-            <h2>Start with overwhelmed specialists, not hospitals.</h2>
-            <p>
-              The first audience is doctors who already read research but cannot keep up: lipidology, cardiometabolic medicine,
-              oncology, psychiatry, longevity, and high-end primary care.
-            </p>
+            <p class="eyebrow">How it avoids making you look careless</p>
+            <h2>SignalMD is built to make uncertainty visible.</h2>
           </div>
-          <div class="launch-copy">
-            <h3>Public promise</h3>
-            <p>
-              SignalMD is a research radar for clinicians: a weekly, source-linked feed of the studies most likely to matter to
-              your specialty and watched topics.
-            </p>
-            <h3>First call to action</h3>
-            <p>Join the founding clinician list and tell SignalMD which research areas you never want to miss.</p>
+          <div class="trust-grid">
+            <article>
+              <h3>Source locked</h3>
+              <p>Briefs can only list retrieved PubMed records. If there is no source, the app does not present a claim.</p>
+            </article>
+            <article>
+              <h3>Double checked</h3>
+              <p>Each source card confirms the PubMed ID came from search, matched summary metadata, and has a public link.</p>
+            </article>
+            <article>
+              <h3>Doctor respectful</h3>
+              <p>The wording asks whether evidence applies to you. It does not accuse, diagnose, prescribe, or demand.</p>
+            </article>
+            <article>
+              <h3>Human readable</h3>
+              <p>The final card is a patient note, not an AI-written paper. It is short enough to actually use in a visit.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -170,12 +189,16 @@
     <template id="result-template">
       <article class="result-card">
         <div class="result-topline">
-          <span class="grade"></span>
+          <label class="select-source">
+            <input type="checkbox" class="source-checkbox">
+            Use in card
+          </label>
           <span class="pubdate"></span>
         </div>
         <h3></h3>
         <p class="journal"></p>
         <div class="tag-row"></div>
+        <div class="integrity-list"></div>
         <div class="result-actions">
           <a target="_blank" rel="noopener">Open PubMed</a>
           <button type="button" class="copy-citation">Copy citation</button>
